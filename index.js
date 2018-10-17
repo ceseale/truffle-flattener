@@ -235,11 +235,15 @@ function getFilePathsFromTruffleRoot(filePaths, truffleRoot) {
 
 async function flatten(filePaths, log) {
   try {
-    const truffleRoot = await getTruffleRoot();
+    let truffleRoot = await getTruffleRoot();
     const filePathsFromTruffleRoot = getFilePathsFromTruffleRoot(
       filePaths,
       truffleRoot
     );
+
+    if (truffleRoot === '') {
+      truffleRoot = '../../';
+    }
 
     process.chdir(truffleRoot);
 
